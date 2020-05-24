@@ -16,10 +16,10 @@
                                     <v-text-field label="狼人杀害" type="number" v-model="item.wolfKill"></v-text-field>
                                 </v-col>
                                 <v-col cols="4">
-                                    <v-text-field label="女巫毒害" type="number" v-model="item.witchKill"></v-text-field>
+                                    <v-text-field label="女巫解救" type="number" v-model="item.witchSave"></v-text-field>
                                 </v-col>
                                 <v-col cols="4">
-                                    <v-text-field label="女巫解救" type="number" v-model="item.witchSave"></v-text-field>
+                                    <v-text-field label="女巫毒害" type="number" v-model="item.witchKill"></v-text-field>
                                 </v-col>
                                 <v-col cols="4">
                                     <v-text-field label="放逐" type="number" v-model="item.peopleKill"></v-text-field>
@@ -38,7 +38,7 @@
             <v-col cols="4" v-for="index in 8" v-bind:key="index">
                 <v-card class="roleCard" height="70px">
                     <v-row justify="center">
-                        <v-col cols="11">
+                        <v-col cols="10">
                             <v-select v-bind:items="roles" v-bind:label="index.toString()"
                                       class="selectRole"></v-select>
                         </v-col>
@@ -59,11 +59,11 @@
         methods: {
             addNewItem() {
                 let newObj = {
-                    wolfKill: 0,
-                    witchKill: 0,
-                    witchSave: 0,
-                    peopleKill: 0,
-                    hunterKill: 0,
+                    wolfKill: '',
+                    witchKill: '',
+                    witchSave: '',
+                    peopleKill: '',
+                    hunterKill: '',
                 };
                 this.item.push(newObj);
             }

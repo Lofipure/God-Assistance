@@ -16,10 +16,10 @@
                                     <v-text-field label="狼人杀害" type="number" v-model="item.wolfKill"></v-text-field>
                                 </v-col>
                                 <v-col cols="4">
-                                    <v-text-field label="女巫毒害" type="number" v-model="item.witchKill"></v-text-field>
+                                    <v-text-field label="女巫解救" type="number" v-model="item.witchSave"></v-text-field>
                                 </v-col>
                                 <v-col cols="4">
-                                    <v-text-field label="女巫解救" type="number" v-model="item.witchSave"></v-text-field>
+                                    <v-text-field label="女巫毒害" type="number" v-model="item.witchKill"></v-text-field>
                                 </v-col>
                                 <v-col cols="4">
                                     <v-text-field label="放逐" type="number" v-model="item.peopleKill"></v-text-field>
@@ -59,11 +59,11 @@
         methods: {
             addNewItem() {
                 let newObj = {
-                    wolfKill: 0,
-                    witchKill: 0,
-                    witchSave: 0,
-                    peopleKill: 0,
-                    hunterKill: 0,
+                    wolfKill: '',
+                    witchKill: '',
+                    witchSave: '',
+                    peopleKill: '',
+                    hunterKill: '',
                 };
                 this.item.push(newObj);
             }

@@ -16,10 +16,14 @@
                                     <v-text-field label="狼人杀害" type="number" v-model="item.wolfKill"></v-text-field>
                                 </v-col>
                                 <v-col cols="4">
+                                    <v-text-field label="女巫解救" type="number" v-model="item.witchSave"></v-text-field>
+                                </v-col>
+                                <v-col cols="4">
                                     <v-text-field label="女巫毒害" type="number" v-model="item.witchKill"></v-text-field>
                                 </v-col>
                                 <v-col cols="4">
-                                    <v-text-field label="女巫解救" type="number" v-model="item.witchSave"></v-text-field>
+                                    <v-text-field label="守卫守护" type="number"
+                                                  v-model="item.guardianProtect"></v-text-field>
                                 </v-col>
                                 <v-col cols="4">
                                     <v-text-field label="放逐" type="number" v-model="item.peopleKill"></v-text-field>
@@ -27,9 +31,7 @@
                                 <v-col cols="4">
                                     <v-text-field label="猎人杀害" type="number" v-model="item.hunterKill"></v-text-field>
                                 </v-col>
-                                <v-col cols="4">
-                                    <v-text-field label="守卫守护" type="number" v-model="item.guardianProtect"></v-text-field>
-                                </v-col>
+
                             </v-row>
                         </v-card-text>
                     </v-card>
@@ -56,18 +58,18 @@
     export default {
         name: "Eleven",
         data: () => ({
-            roles: ["狼人", "预言家", "女巫", "猎人", "村民","守卫"],
+            roles: ["狼人", "预言家", "女巫", "猎人", "村民", "守卫"],
             item: [],
         }),
         methods: {
             addNewItem() {
                 let newObj = {
-                    wolfKill: 0,
-                    witchKill: 0,
-                    witchSave: 0,
-                    peopleKill: 0,
-                    hunterKill: 0,
-                    guardianProtect: 0,
+                    wolfKill: '',
+                    witchKill: '',
+                    witchSave: '',
+                    peopleKill: '',
+                    hunterKill: '',
+                    guardianProtect: '',
                 };
                 this.item.push(newObj);
             }

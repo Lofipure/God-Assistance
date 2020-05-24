@@ -2,12 +2,12 @@
     <div>
         <v-container>
             <v-row justify="center">
-                <v-col cols="8" class="text-center title">
+                <v-col cols="10" class="text-center title">
                     欢迎使用狼人杀上帝助手
                 </v-col>
             </v-row>
             <v-row justify="center">
-                <v-col cols="6" class="text-center subtitle-1">
+                <v-col cols="10" class="text-center subtitle-1">
                     目前支持的模式如下
                 </v-col>
             </v-row>
