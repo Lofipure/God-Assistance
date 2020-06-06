@@ -45,7 +45,9 @@
             },
             startMethod() {
                 this.interval = setInterval(() => {
-                    this.totalTime--;
+                    if(this.totalTime !== 0) {
+                        this.totalTime--;
+                    }
                 }, 1000);
             }
         }
