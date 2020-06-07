@@ -44,8 +44,12 @@
                                                   v-on:change="judgeDead(i)"></v-text-field>
                                 </v-col>
                                 <v-col cols="4">
-                                    <v-text-field label="猎人杀害" type="number" v-model="item.hunterKill"
-                                                  v-on:change="judgeDead(i)"></v-text-field>
+                                    <v-badge v-bind:icon="hunterStatus === true ? '':'mdi-emoticon-cry'"
+                                             v-bind:color="hunterStatus === true ? '':'red'">
+                                        <v-text-field label="猎人杀害" type="number" v-model="item.hunterKill"
+                                                      v-on:change="judgeDead(i)"
+                                                      v-bind:disabled="!hunterStatus"></v-text-field>
+                                    </v-badge>
                                 </v-col>
 
                             </v-row>
@@ -82,7 +86,8 @@
             item: [],
             playerStatus: [true, true, true, true, true, true, true, true, true, true, true, true, true],
             witchSaveStatus: true,
-            witchKillStatus: true
+            witchKillStatus: true,
+            hunterStatus: true
         }),
         methods: {
             addNewItem() {
@@ -102,7 +107,7 @@
                 if (forJudge.witchSave !== '') {
                     this.witchSaveStatus = false;
                 }
-                if(forJudge.witchKill !== '') {
+                if (forJudge.witchKill !== '') {
                     this.witchKillStatus = false;
                 }
                 if (forJudge.guardianProtect === forJudge.witchSave) {
@@ -130,6 +135,7 @@
                     this.playerStatus[forJudge.witchKill] = false;
                 }
                 if (forJudge.hunterKill !== '') {
+                    this.hunterStatus = false;
                     this.playerStatus[forJudge.hunterKill] = false;
                 }
                 if (forJudge.peopleKill !== '') {

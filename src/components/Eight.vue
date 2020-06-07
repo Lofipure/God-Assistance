@@ -40,8 +40,12 @@
                                                   v-on:change="judgeDead(i)"></v-text-field>
                                 </v-col>
                                 <v-col cols="4">
-                                    <v-text-field label="猎人杀害" type="number" v-model="item.hunterKill"
-                                                  v-on:change="judgeDead(i)"></v-text-field>
+                                    <v-badge v-bind:icon="hunterStatus === true ? '':'mdi-emoticon-cry'"
+                                             v-bind:color="hunterStatus === true ? '':'red'">
+                                        <v-text-field label="猎人杀害" type="number" v-model="item.hunterKill"
+                                                      v-on:change="judgeDead(i)"
+                                                      v-bind:disabled="!hunterStatus"></v-text-field>
+                                    </v-badge>
                                 </v-col>
                             </v-row>
                         </v-card-text>
@@ -77,7 +81,8 @@
             item: [],
             playerStatus: [true, true, true, true, true, true, true, true, true],
             witchKillStatus: true,
-            witchSaveStatus: true
+            witchSaveStatus: true,
+            hunterStatus: true
         }),
         methods: {
             addNewItem() {
@@ -107,6 +112,7 @@
                 }
                 if (forJudge.hunterKill !== '') {
                     this.playerStatus[forJudge.hunterKill] = false;
+                    this.hunterStatus = false;
                 }
                 if (forJudge.peopleKill !== '') {
                     this.playerStatus[forJudge.peopleKill] = false;
