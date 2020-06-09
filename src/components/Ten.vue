@@ -48,6 +48,10 @@
                                                       v-bind:disabled="!hunterStatus"></v-text-field>
                                     </v-badge>
                                 </v-col>
+                                <v-col cols="4">
+                                    <v-text-field label="当选警长" type="number" v-model="police"
+                                                  v-on:change="policeEmit($event)"></v-text-field>
+                                </v-col>
                             </v-row>
                         </v-card-text>
                     </v-card>
@@ -60,11 +64,13 @@
                 <v-card class="roleCard" height="70px">
                     <v-row justify="center">
                         <v-col cols="11">
-                            <v-badge
-                                    v-bind:icon="playerStatus[index] === true ? 'mdi-emoticon':'mdi-emoticon-dead'"
-                                    v-bind:color="playerStatus[index] === true ? 'success' : 'red'">
-                                <v-select v-bind:items="roles" v-bind:label="index.toString()"
-                                          class="selectRole" v-bind:disabled="!playerStatus[index]"></v-select>
+                            <v-badge icon="mdi-shield-star" left v-model="playerPoliceStatus[index]" class="police"
+                                     color="orange">
+                                <v-badge v-bind:icon="playerStatus[index] === true ? 'mdi-emoticon':'mdi-emoticon-dead'"
+                                         v-bind:color="playerStatus[index] === true ? 'success' : 'red'">
+                                    <v-select v-bind:items="roles" v-bind:label="index.toString()"
+                                              class="selectRole" v-bind:disabled="!playerStatus[index]"></v-select>
+                                </v-badge>
                             </v-badge>
                         </v-col>
                     </v-row>
@@ -81,11 +87,19 @@
             roles: ["狼人", "预言家", "女巫", "猎人", "村民"],
             item: [],
             playerStatus: [true, true, true, true, true, true, true, true, true, true, true],
+            playerPoliceStatus: ["", "", "", "", "", "", "", "", "","",""],
             witchKillStatus: true,
             witchSaveStatus: true,
-            hunterStatus: true
+            hunterStatus: true,
+            police: ""
         }),
         methods: {
+            policeEmit(e) {
+                this.playerPoliceStatus = ["", "", "", "", "", "", "", "", "","",""];
+                this.playerPoliceStatus[e] = true;
+                // console.log(this.playerPoliceStatus);
+                this.$mount(".police");
+            },
             addNewItem() {
                 let newObj = {
                     wolfKill: '',
@@ -102,7 +116,7 @@
                 if (forJudge.witchSave !== '') {
                     this.witchSaveStatus = false;
                 }
-                if(forJudge.witchKill !== '') {
+                if (forJudge.witchKill !== '') {
                     this.witchKillStatus = false;
                 }
                 if (forJudge.wolfKill !== '') {

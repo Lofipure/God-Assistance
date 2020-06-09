@@ -27,8 +27,6 @@
                 <CountDown/>
                 <router-view></router-view>
             </v-container>
-
-
         </div>
     </v-app>
 </template>
