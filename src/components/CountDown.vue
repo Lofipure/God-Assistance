@@ -33,19 +33,24 @@
         name: "CountDown",
         data: () => ({
             totalTime: 90,
-            interval: null
+            interval: "",
+            state: true
         }),
         methods: {
             pauseMethod() {
                 clearInterval(this.interval);
+                this.state = true;
+                console.log(this.state);
             },
             restartMethod() {
                 clearInterval(this.interval);
+                this.state = true;
                 this.totalTime = 90;
             },
             startMethod() {
-                if (this.interval === null) {
-                    console.log("还没有");
+                console.log(this.state);
+                if (this.state) {
+                    this.state = false;
                     this.interval = setInterval(() => {
                         if (this.totalTime !== 0) {
                             this.totalTime--;
