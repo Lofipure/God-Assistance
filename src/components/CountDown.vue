@@ -44,11 +44,14 @@
                 this.totalTime = 90;
             },
             startMethod() {
-                this.interval = setInterval(() => {
-                    if(this.totalTime !== 0) {
-                        this.totalTime--;
-                    }
-                }, 1000);
+                if (this.interval === null) {
+                    console.log("还没有");
+                    this.interval = setInterval(() => {
+                        if (this.totalTime !== 0) {
+                            this.totalTime--;
+                        }
+                    }, 1000);
+                }
             }
         }
     }

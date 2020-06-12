@@ -43,3 +43,8 @@ npm run build
 ### version 1.3.2
 - Date: 2020-6-9 21:00
 - 警长标记
+
+### version 1.3.3
+
+- Date: 2020-6-12 16:30
+- 修复计时器Bug
