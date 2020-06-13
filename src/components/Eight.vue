@@ -1,10 +1,5 @@
 <template>
     <div>
-        <!--
-            1. 女巫第只能第一晚自救
-            2. 猎人毒杀不能开枪
-            3. 不能同守一个人
-        -->
         <div class="actions">
             <v-row justify="center">
                 <v-col cols="11">
@@ -38,7 +33,12 @@
                                     </v-badge>
                                 </v-col>
                                 <v-col cols="4">
-                                    <v-text-field label="预言家查验" type="number" v-model="item.godSee"></v-text-field>
+                                    <v-badge
+                                            v-bind:color="prophetCheck === 1 ? '':(prophetCheck === true ? 'red':'success')"
+                                            v-bind:icon="prophetCheck === 1 ? '' : (prophetCheck === true ? 'mdi-shield-alert' : 'mdi-shield-check')">
+                                        <v-text-field label="预言家查验" type="number" v-model="item.godSee"
+                                                      v-on:change="judgeWolf($event)"></v-text-field>
+                                    </v-badge>
                                 </v-col>
                                 <v-col cols="4">
                                     <v-text-field label="放逐" type="number" v-model="item.peopleKill"
@@ -73,7 +73,7 @@
                                 <v-badge v-bind:icon="playerStatus[index] === true ? 'mdi-emoticon':'mdi-emoticon-dead'"
                                          v-bind:color="playerStatus[index] === true ? 'success' : 'red'">
                                     <v-select v-bind:items="roles" v-bind:label="index.toString()"
-                                              class="selectRole" v-bind:disabled="!playerStatus[index]"></v-select>
+                                              class="selectRole" v-model="playerRole[index]"></v-select>
                                 </v-badge>
                             </v-badge>
                         </v-col>
@@ -91,11 +91,13 @@
             roles: ["狼人", "预言家", "女巫", "猎人", "村民"],
             item: [],
             playerStatus: [true, true, true, true, true, true, true, true, true],
+            playerRole: ["", "", "", "", "", "", "", "", ""],
             playerPoliceStatus: ["", "", "", "", "", "", "", "", ""],
             witchKillStatus: true,
             witchSaveStatus: true,
             hunterStatus: true,
-            police: ''
+            police: '',
+            prophetCheck: 1
         }),
         methods: {
             policeEmit(e) {
@@ -114,6 +116,7 @@
                     godSee: ""
                 };
                 this.item.push(newObj);
+                this.prophetCheck = 1;
             },
             judgeDead(index) {
                 let forJudge = this.item[index];
@@ -137,8 +140,11 @@
                     this.playerStatus[forJudge.peopleKill] = false;
                 }
                 this.$mount(".roleCard");
+            },
+            judgeWolf(index) {
+                this.prophetCheck = this.playerRole[index] === "狼人";
             }
-        }
+        },
     };
 </script>
 

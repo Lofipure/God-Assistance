@@ -33,7 +33,13 @@
                                     </v-badge>
                                 </v-col>
                                 <v-col cols="4">
-                                    <v-text-field label="预言家查验" type="number" v-model="item.godSee"></v-text-field>
+                                    <!--<v-text-field label="预言家查验" type="number" v-model="item.godSee"></v-text-field>-->
+                                    <v-badge
+                                            v-bind:color="prophetCheck === 1 ? '':(prophetCheck === true ? 'red':'success')"
+                                            v-bind:icon="prophetCheck === 1 ? '' : (prophetCheck === true ? 'mdi-shield-alert' : 'mdi-shield-check')">
+                                        <v-text-field label="预言家查验" type="number" v-model="item.godSee"
+                                                      v-on:change="judgeWolf($event)"></v-text-field>
+                                    </v-badge>
                                 </v-col>
                                 <v-col cols="4">
                                     <v-text-field label="守卫守护" type="number" v-model="item.guardianProtect"
@@ -49,6 +55,14 @@
                                         <v-text-field label="猎人杀害" type="number" v-model="item.hunterKill"
                                                       v-on:change="judgeDead(i)"
                                                       v-bind:disabled="!hunterStatus"></v-text-field>
+                                    </v-badge>
+                                </v-col>
+                                <v-col cols="4">
+                                    <v-badge v-bind:icon="wolfKingStatus === true ? '':'mdi-emoticon-cry'"
+                                             v-bind:color="wolfKingStatus === true ? '':'red'">
+                                        <v-text-field label="狼王杀害" type="number" v-model="item.wolfKingKill"
+                                                      v-on:change="judgeDead(i)"
+                                                      v-bind:disabled="!wolfKingStatus"></v-text-field>
                                     </v-badge>
                                 </v-col>
                                 <v-col cols="4">
@@ -72,7 +86,7 @@
                                 <v-badge v-bind:icon="playerStatus[index] === true ? 'mdi-emoticon':'mdi-emoticon-dead'"
                                          v-bind:color="playerStatus[index] === true ? 'success' : 'red'">
                                     <v-select v-bind:items="roles" v-bind:label="index.toString()"
-                                              class="selectRole" v-bind:disabled="!playerStatus[index]"></v-select>
+                                              class="selectRole" v-model="playerRole[index]"></v-select>
                                 </v-badge>
                             </v-badge>
                         </v-col>
@@ -87,18 +101,21 @@
     export default {
         name: "Twelve",
         data: () => ({
-            roles: ["狼人", "预言家", "女巫", "猎人", "村民", "守卫"],
+            roles: ["狼人", "狼王", "预言家", "女巫", "猎人", "守卫", "村民"],
             item: [],
             playerStatus: [true, true, true, true, true, true, true, true, true, true, true, true, true],
-            playerPoliceStatus: ["", "", "", "", "", "", "", "", "","","","",""],
+            playerPoliceStatus: ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+            playerRole: ["", "", "", "", "", "", "", "", "", "", "", "", ""],
             witchSaveStatus: true,
             witchKillStatus: true,
             hunterStatus: true,
-            police: ""
+            police: "",
+            prophetCheck: 1,
+            wolfKingStatus: true
         }),
         methods: {
             policeEmit(e) {
-                this.playerPoliceStatus = ["", "", "", "", "", "", "", "", "","","","",""];
+                this.playerPoliceStatus = ["", "", "", "", "", "", "", "", "", "", "", "", ""];
                 this.playerPoliceStatus[e] = true;
                 // console.log(this.playerPoliceStatus);
                 this.$mount(".police");
@@ -111,9 +128,11 @@
                     peopleKill: '',
                     hunterKill: '',
                     guardianProtect: '',
-                    godSee: ''
+                    godSee: '',
+                    wolfKingKill: ''
                 };
                 this.item.push(newObj);
+                this.prophetCheck = 1;
             },
             judgeDead(index) {
                 let forJudge = this.item[index];
@@ -151,10 +170,26 @@
                     this.hunterStatus = false;
                     this.playerStatus[forJudge.hunterKill] = false;
                 }
+                if (forJudge.wolfKingKill !== '') {
+                    this.wolfKingStatus = false;
+                    this.playerStatus[forJudge.wolfKingKill] = false;
+                }
                 if (forJudge.peopleKill !== '') {
                     this.playerStatus[forJudge.peopleKill] = false;
                 }
                 this.$mount(".roleCard");
+            },
+            judgeWolf(index) {
+                this.prophetCheck = this.playerRole[index] === "狼人" || this.playerRole[index] === "狼王";
+            }
+        },
+        watch: {
+            playerRole: {
+                handler(newV, oldV) {
+                    console.log("new", newV);
+                    console.log("old", oldV);
+                },
+                deep: true
             }
         }
     }

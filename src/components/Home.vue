@@ -2,17 +2,12 @@
     <div>
         <v-container>
             <v-row justify="center">
-                <v-col cols="10" class="text-center title">
-                    欢迎使用狼人杀上帝助手
-                </v-col>
-            </v-row>
-            <v-row justify="center">
                 <v-col cols="10" class="text-center subtitle-1">
                     目前支持的模式如下
                 </v-col>
             </v-row>
             <v-row justify="center">
-                <v-col cols="4" v-for="(item,i) in pattern" v-bind:key="i">
+                <v-col cols="6" v-for="(item,i) in pattern" v-bind:key="i">
                     <v-card>
                         <v-card-subtitle class="text-center">{{item.name}}</v-card-subtitle>
                         <v-card-text>
@@ -26,6 +21,21 @@
                     </v-card>
                 </v-col>
             </v-row>
+            <!--<v-row justify="center">
+                <v-col cols="10">
+                    <v-card color="primary">
+                        <v-card-title>诚邀开发者</v-card-title>
+                        <v-card-text>
+                            <v-row justify="center" class="text-center">
+                                开发框架: Vue.js + Vuetify
+                            </v-row>
+                            <v-row justify="center" class="text-center">
+                                Email: littlebanana@126.com
+                            </v-row>
+                        </v-card-text>
+                    </v-card>
+                </v-col>
+            </v-row>-->
         </v-container>
     </div>
 </template>
@@ -66,5 +76,4 @@
 </script>
 
 <style scoped>
-
 </style>
