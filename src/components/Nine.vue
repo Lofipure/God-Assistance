@@ -74,9 +74,9 @@
                     <v-row justify="center">
                         <v-col cols="10">
                             <v-badge icon="mdi-shield-star" left v-model="playerPoliceStatus[index]" class="police"
-                                     color="orange" overlap>
+                                     color="orange">
                                 <v-badge v-bind:icon="playerStatus[index] === true ? 'mdi-emoticon':'mdi-emoticon-dead'"
-                                         v-bind:color="playerStatus[index] === true ? 'success' : 'red'" overlap>
+                                         v-bind:color="playerStatus[index] === true ? 'success' : 'red'">
                                     <v-select v-bind:items="roles" v-bind:label="index.toString()"
                                               class="selectRole" v-model="playerRole[index]"></v-select>
                                 </v-badge>
