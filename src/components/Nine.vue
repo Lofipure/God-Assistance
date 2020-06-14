@@ -2,11 +2,6 @@
     <div>
         <div class="actions">
             <v-row justify="center">
-                <v-col cols="11">
-                    <v-btn width="100%" color="success" v-on:click="addNewItem">天黑请闭眼</v-btn>
-                </v-col>
-            </v-row>
-            <v-row justify="center">
                 <v-col v-for="(item,i) in item" v-bind:key="i" cols="12">
                     <v-card>
                         <v-card-title>第{{i+1}}回合</v-card-title>
@@ -36,9 +31,9 @@
                                     <!--<v-text-field label="预言家查验" type="number" v-model="item.godSee"
                                                   v-on:change="judgeDead(i)"></v-text-field>-->
                                     <v-badge
-                                            v-bind:color="prophetCheck === 1 ? '':(prophetCheck === true ? 'red':'success')"
-                                            v-bind:icon="prophetCheck === 1 ? '' : (prophetCheck === true ? 'mdi-shield-alert' : 'mdi-shield-check')">
-                                        <v-text-field label="预言家查验" type="number" v-model="item.godSee"
+                                            v-bind:color="item.prophetCheck === null ? '':(item.prophetCheck === true ? 'red':'success')"
+                                            v-bind:icon="item.prophetCheck === null ? '' : (item.prophetCheck === true ? 'mdi-shield-alert' : 'mdi-shield-check')">
+                                        <v-text-field label="预言家查验" type="number" v-model="item.prophetCheckTemp"
                                                       v-on:change="judgeWolf($event)"></v-text-field>
                                     </v-badge>
                                 </v-col>
@@ -61,6 +56,11 @@
                             </v-row>
                         </v-card-text>
                     </v-card>
+                </v-col>
+            </v-row>
+            <v-row justify="center">
+                <v-col cols="11">
+                    <v-btn width="100%" color="success" v-on:click="addNewItem">天黑请闭眼</v-btn>
                 </v-col>
             </v-row>
         </div>
@@ -99,7 +99,7 @@
             witchSaveStatus: true,
             hunterStatus: true,
             police: "",
-            prophetCheck: 1
+            // prophetCheck: 1
         }),
         methods: {
             policeEmit(e) {
@@ -115,10 +115,12 @@
                     witchSave: '',
                     peopleKill: '',
                     hunterKill: '',
-                    godSee: ''
+                    godSee: "",
+                    prophetCheck: null,
+                    prophetCheckTemp: "",
                 };
                 this.item.push(newObj);
-                this.prophetCheck = 1;
+                // this.prophetCheck = 1;
             },
             judgeDead(index) {
                 let forJudge = this.item[index];
@@ -144,7 +146,8 @@
                 this.$mount(".roleCard");
             },
             judgeWolf(index) {
-                this.prophetCheck = this.playerRole[index] === "狼人";
+                this.item[this.item.length - 1].prophetCheck = this.item[this.item.length - 1].prophetCheckTemp;
+                this.item[this.item.length - 1].prophetCheck = this.playerRole[index] === "狼人";
             }
         }
     };
