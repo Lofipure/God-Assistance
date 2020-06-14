@@ -1,15 +1,21 @@
 <template>
     <v-app>
         <div>
-            <v-app-bar color="primary" dark>
-                <v-app-bar-nav-icon v-on:click="drawer = true"></v-app-bar-nav-icon>
+            <v-app-bar color="#4DB6AC" dark>
+                <!--<v-app-bar-nav-icon v-on:click="drawer = true"></v-app-bar-nav-icon>-->
+                <!--<v-btn icon v-on:click.stop="dialog = true" to="/home">
+                    <v-icon>mdi-home</v-icon>
+                </v-btn>-->
+                <v-btn icon to="/home">
+                    <v-icon>mdi-home</v-icon>
+                </v-btn>
                 <v-toolbar-title>狼人杀上帝助手</v-toolbar-title>
                 <v-spacer/>
-                <v-btn icon v-on:click.stop="dialog = true">
+                <!--<v-btn icon v-on:click.stop="dialog = true">
                     <v-icon>mdi-account</v-icon>
-                </v-btn>
+                </v-btn>-->
             </v-app-bar>
-            <v-navigation-drawer v-model="drawer" absolute temporary>
+            <!--<v-navigation-drawer v-model="drawer" absolute temporary>
                 <v-list nav>
                     <v-list-item-group>
                         <v-list-item to="/home">
@@ -26,15 +32,15 @@
                         </v-list-item>
                     </v-list-item-group>
                 </v-list>
-            </v-navigation-drawer>
+            </v-navigation-drawer>-->
             <v-container>
                 <CountDown/>
                 <router-view></router-view>
             </v-container>
         </div>
         <div>
-            <v-dialog v-model="dialog">
-                <v-card>
+            <!--<v-dialog v-model="dialog">
+                <v-card width="100%">
                     <v-card-title>诚邀开发者</v-card-title>
                     <v-card-text>
                         <v-row justify="center" class="text-center">
@@ -50,7 +56,7 @@
                         </v-row>
                     </v-card-actions>
                 </v-card>
-            </v-dialog>
+            </v-dialog>-->
         </div>
     </v-app>
 </template>
@@ -64,7 +70,7 @@
             "CountDown": CountDown
         },
         data: () => ({
-            drawer: false,
+            // drawer: false,
             pattern: [
                 {
                     name: "八人场",
@@ -87,7 +93,7 @@
                     route: 'twelve'
                 }
             ],
-            dialog: false
+            // dialog: false
         }),
     };
 </script>
